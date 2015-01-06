@@ -1,0 +1,12 @@
+https://www.johnlamp.net/cmake-tutorial-5-functionally-improved-testing.html
+
+
+How to genererate makefiles with cmake:
+
+mkdir build
+cd build
+cmake -G "Unix Makefiles" ..
+
+
+
+
