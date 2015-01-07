@@ -33,6 +33,7 @@ bin
 
 # Editors
 *.swp
+Session.vim
 
 # OS specific
 .DS_Store

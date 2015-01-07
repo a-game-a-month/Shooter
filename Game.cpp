@@ -15,39 +15,44 @@ Game::Game(unsigned int width, unsigned int height, const std::string& title)
 
 void Game::run() {
 
-  const int tiles[] = {
-    0, 0, 1,
-    1, 0, 0
-  };
+  sf::Clock clock;
 
-  TileMap tm;
-  tm.load("bin/tilemap.png", sf::Vector2u(16,16), tiles, 3, 2);
-
-  sf::View view = window.getView();
-  view.setRotation(45.f);
-
+  sf::Time lag = sf::milliseconds(0);
   while(window.isOpen()) {
+    sf::Time elapsed = clock.restart();
+    lag += elapsed;
 
-    sf::Event event;
-    while(window.pollEvent(event)) {
-      if(event.type == sf::Event::Closed)
-        window.close();
+    process_input();
+
+    while(lag >= sf::milliseconds(ms_per_update)) {
+      update();
+      lag -= sf::milliseconds(ms_per_update);
     }
 
-    // update
-    // physics
-
-    window.clear();
-
-    window.setView(view);
+    render(lag);
     
-    tm.setPosition(400.f, 300.f);
-    window.draw(tm);
-    // render
-    
-    window.display();
   }
 
+};
+
+void Game::process_input() {
+  sf::Event event;
+  while(window.pollEvent(event)) {
+    if(event.type == sf::Event::Closed)
+      window.close();
+  }
+};
+
+void Game::update() {
+
+};
+
+void Game::render(const sf::Time& left_over) {
+  window.clear();
+
+  
+
+  window.display();
 };
 
 }

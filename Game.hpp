@@ -16,6 +16,12 @@ public:
 private:
   sf::RenderWindow window;
 
+  static const unsigned int ms_per_update = 16;
+
+  void process_input();
+  void update();
+  void render(const sf::Time& left_over);
+
 };
 
 }
