@@ -6,7 +6,9 @@ project(Shooter CXX)
 
 enable_testing()
 
+set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG}")
 
+set(CMAKE_BUILD_TYPE Debug)
 
 add_executable(shooter main.cpp Game.cpp)
 

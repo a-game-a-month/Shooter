@@ -11,9 +11,7 @@ class Game {
 public:
   Game(unsigned int width, unsigned int height, const std::string& title);
 
-  void init();
   void run();
-  void teardown();
 
 private:
   sf::RenderWindow window;
