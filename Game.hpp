@@ -5,6 +5,8 @@
 
 #include <string>
 
+#include "utility.hpp"
+
 namespace shooter {
 
 class Game {
@@ -16,7 +18,7 @@ public:
 private:
   sf::RenderWindow window;
 
-  static const unsigned int ms_per_update = 16;
+  const sf::Time ms_per_update = 16_ms;
 
   void process_input();
   void update();

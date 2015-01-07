@@ -4,6 +4,8 @@
 
 #include "TileMap.hpp"
 
+#include "utility.hpp"
+
 namespace shooter {
 
 Game::Game(unsigned int width, unsigned int height, const std::string& title)
@@ -17,16 +19,16 @@ void Game::run() {
 
   sf::Clock clock;
 
-  sf::Time lag = sf::milliseconds(0);
+  sf::Time lag = 0_ms;
   while(window.isOpen()) {
     sf::Time elapsed = clock.restart();
     lag += elapsed;
 
     process_input();
 
-    while(lag >= sf::milliseconds(ms_per_update)) {
+    while(lag >= ms_per_update) {
       update();
-      lag -= sf::milliseconds(ms_per_update);
+      lag -= ms_per_update;
     }
 
     render(lag);
