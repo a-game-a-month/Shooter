@@ -2,16 +2,19 @@
 
 #include "Game.hpp"
 
+#include "Level.hpp"
 #include "TileMap.hpp"
 
 #include "utility.hpp"
 
 namespace shooter {
 
-Game::Game(unsigned int width, unsigned int height, const std::string& title)
-  : window(sf::VideoMode(width, height), title) {
+Game::Game(unsigned int window_width, unsigned int window_height, const std::string& title)
+  : window(sf::VideoMode(window_width, window_height), title) {
 
   window.setFramerateLimit(60);
+
+  level.load_level("bin/level1.txt", sf::Vector2u(16, 16));
 
 };
 
@@ -49,10 +52,10 @@ void Game::update() {
 
 };
 
-void Game::render(const sf::Time& left_over) {
+void Game::render(const sf::Time& ) {
   window.clear();
 
-  
+  window.draw(level);
 
   window.display();
 };

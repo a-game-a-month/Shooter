@@ -5,18 +5,20 @@
 
 #include <string>
 
+#include "Level.hpp"
 #include "utility.hpp"
 
 namespace shooter {
 
 class Game {
 public:
-  Game(unsigned int width, unsigned int height, const std::string& title);
+  Game(unsigned int window_width, unsigned int window_height, const std::string& title);
 
   void run();
 
 private:
   sf::RenderWindow window;
+  Level level;
 
   const sf::Time ms_per_update = 16_ms;
 
