@@ -19,27 +19,13 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 ${platform_flags}")
 
 set(CMAKE_BUILD_TYPE Debug)
 
-set(srcs
-    main.cpp
-    utility.cpp
-    Game.cpp 
-    Level.cpp)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/shooter)
 
-include_directories(${CMAKE_CURRENT_SOURCE_DIR})
-
+add_subdirectory(shooter)
 add_subdirectory(unit_tests)
 
-add_executable(shooter ${srcs})
-
-# Library lookup
-
-# SFML
-set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake_modules" ${CMAKE_MODULE_PATH})
-find_package(SFML 2 REQUIRED system window graphics network audio)
-if(SFML_FOUND)
-  include_directories(${SFML_INCLUDE_DIR})
-  target_link_libraries(shooter ${SFML_LIBRARIES})
-endif()
+add_executable(game main.cpp)
+target_link_libraries(game shooter_core) 
 
 
 

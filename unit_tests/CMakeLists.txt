@@ -1,4 +1,5 @@
 
+# Set up
 
 set(GMOCK_DIR "../libs/gmock-1.7.0/")
 
@@ -14,6 +15,8 @@ add_subdirectory(${GMOCK_DIR} ${CMAKE_BINARY_DIR}/gmock)
 include_directories(SYSTEM ${GMOCK_DIR}/gtest/include
                            ${GMOCK_DIR}/include)
 
+# Helper function
+
 function(add_gmock_test target)
   add_executable(${target} ${ARGN})
   target_link_libraries(${target} gmock_main)
@@ -27,10 +30,7 @@ function(add_gmock_test target)
                      COMMENT "Running ${target}" VERBATIM)
 endfunction()
 
-add_gmock_test(UtilitySplitTest utility_split.cpp)
+# The tests
 
-#add_executable(ShooterTests utility_split.cpp)
-#
-#target_link_libraries(ShooterTests gmock_main)
-#
-#add_test(ShooterTests ShooterTests)
+add_gmock_test(UtilitySplitTest utility_split.cpp)
+target_link_libraries(UtilitySplitTest shooter_core)
