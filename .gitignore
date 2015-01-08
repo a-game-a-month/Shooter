@@ -29,7 +29,10 @@
 build/*
 
 # Binaries
-bin
+data
+
+# Libraries
+libs/*
 
 # Editors
 *.swp

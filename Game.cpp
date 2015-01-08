@@ -14,7 +14,7 @@ Game::Game(unsigned int window_width, unsigned int window_height, const std::str
 
   window.setFramerateLimit(60);
 
-  level.load_level("bin/level1.txt", sf::Vector2u(16, 16));
+  level.load_level("data/level1.txt", sf::Vector2u(16, 16));
 
 };
 
