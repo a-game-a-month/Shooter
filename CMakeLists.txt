@@ -6,13 +6,34 @@ project(Shooter CXX)
 
 enable_testing()
 
+# Compiler specific flags
+if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU" OR
+   "${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
+  set(platform_flags "-Wall -Wextra")
+elseif("${CMAKE_CXX_COMPILER_ID}" STREQUAL "MSVC")
+  set(platform_flags "/W4 /WX /EHsc")
+endif()
+
 set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG}")
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 ${platform_flags}")
 
 set(CMAKE_BUILD_TYPE Debug)
 
-add_executable(shooter main.cpp utility.cpp Game.cpp Level.cpp)
+set(srcs
+    main.cpp
+    utility.cpp
+    Game.cpp 
+    Level.cpp)
 
+include_directories(${CMAKE_CURRENT_SOURCE_DIR})
+
+add_subdirectory(unit_tests)
+
+add_executable(shooter ${srcs})
+
+# Library lookup
+
+# SFML
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake_modules" ${CMAKE_MODULE_PATH})
 find_package(SFML 2 REQUIRED system window graphics network audio)
 if(SFML_FOUND)
@@ -21,5 +42,5 @@ if(SFML_FOUND)
 endif()
 
 
-add_test(shooter_test shooter)
+
 
