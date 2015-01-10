@@ -3,6 +3,8 @@
 #include "my_rand.hpp"
 #include "ScopedTimer.hpp"
 
+#include "semi_virtual.hpp"
+
 #include <vector>
   using std::vector;
 
@@ -31,12 +33,34 @@ void test_virtual(unsigned int nr, unsigned maximum_cmps) {
   }
 };
 
+void test_semi(unsigned int nr, unsigned maximum_cmps) {
+  using namespace semi; 
+
+  vector<BaseObject*> objs(nr);
+
+  std::generate(objs.begin(), objs.end(), std::bind(generate_object, maximum_cmps));
+
+  {
+    ScopedTimer timer;
+
+    for(auto o : objs) {
+      o->update();
+    }
+  }
+
+  std::cout << int_a << ", " << int_b << std::endl;
+
+  for(auto o : objs) {
+    delete o;
+  }
+};
 
 int main() {
   unsigned int nr = 50000;
   unsigned int maximum_cmps = 6;
 
   test_virtual(nr, maximum_cmps);
+  test_semi(nr, maximum_cmps);
 
 
 }
